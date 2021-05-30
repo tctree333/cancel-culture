@@ -8,8 +8,7 @@
 				plural: page.host.includes('arecancelled.com'),
 				name: page.host
 					.split('.')[0]
-					.replace('-', ' ')
-					.split(' ')
+					.split('-')
 					.map((c) => c[0].toUpperCase() + c.substr(1).toLowerCase())
 					.join(' ')
 			}
@@ -33,7 +32,7 @@
 		: `${name} ${plural ? 'are' : 'is'} cancelled! ` +
 		  `What terrible things did they do? Who knows! All we know is that ` +
 		  `${name} ${plural ? 'are' : 'is'} cancelled, and they probably deserve it! ` +
-		  `Join us as we celebrate the #${name.replace(' ', '')}${plural ? 'Are' : 'Is'}OverParty!`;
+		  `Join us as we celebrate the #${name.split(' ').join('')}${plural ? 'Are' : 'Is'}OverParty!`;
 </script>
 
 <Head {title} {description} index={main} />
