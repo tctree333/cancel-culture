@@ -11,14 +11,8 @@
 	export let description: string;
 	export let index = true;
 	export let pageImage: PageImage | undefined = undefined;
-	export let canonical: string | undefined = undefined;
 
-	let url = canonical;
-	if (!canonical) {
-		url = fullUrl($page.path);
-		url = url.endsWith('index.html') ? url.substr(0, url.length - 10) : url;
-		url = url.endsWith('/') ? url : url + '/';
-	}
+	let url = fullUrl($page.path);
 
 	function fullUrl(value: string) {
 		let root = 'https://' + $page.host;
@@ -39,7 +33,6 @@
 
 	<title>{title}</title>
 	<meta name="description" content={description} />
-	<link rel="canonical" href={url} />
 
 	<!-- Allow search engines to crawl certain pages -->
 	{#if index === false}
