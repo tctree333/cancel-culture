@@ -5,7 +5,7 @@ export const get: RequestHandler = async ({ query }) => {
 	const plural =
 		query.get('plural') === 'true' ? true : query.get('plural') === 'false' ? false : null;
 	const name = query.get('name');
-	if (name === null || plural === null) {
+	if (name === null || name === '' || plural === null) {
 		return {
 			status: 303,
 			headers: {
