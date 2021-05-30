@@ -65,8 +65,9 @@
 </div>
 
 <main class="min-h-full max-w-4xl px-6 py-4 mx-auto">
-	<slot {main} {plural} cancelledName={name} />
+	<slot />
 </main>
+
 <footer
 	class="flex flex-col items-center justify-center w-full py-16 mt-20 text-gray-100 bg-gray-900 "
 >
