@@ -40,8 +40,9 @@
 		window.setState = function () {
 			const classes = document.querySelector('html').classList;
 			if (
-				localStorage.theme === 'dark' ||
-				(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+				document.cookie.split(';').some((c) => c.includes('theme=dark')) ||
+				(!document.cookie.split(';').some((c) => c.startsWith('theme=')) &&
+					window.matchMedia('(prefers-color-scheme: dark)').matches)
 			) {
 				classes.add('dark');
 			} else {

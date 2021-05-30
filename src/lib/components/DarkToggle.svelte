@@ -1,6 +1,10 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	function toggle() {
-		localStorage.theme = localStorage.theme === 'dark' ? 'light' : 'dark';
+		document.cookie = `theme=${
+			document.cookie.split(';').some((c) => c.includes('theme=dark')) ? 'light' : 'dark'
+		}; SameSite=None; Secure; Domain=${$page.host.split('.').slice(-2).join('')}; Path=/`;
 		//@ts-ignore
 		window.setState();
 	}
