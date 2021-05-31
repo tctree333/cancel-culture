@@ -2,17 +2,28 @@
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ page, fetch }) => {
-		let count = 0;
+		const main = page.host.split('.').length === 2;
 
-		const res = await fetch('/inc', { method: 'GET' });
-		if (res.ok) {
-			const data = await res.json();
-			count = data.count;
+		let count = 0;
+		let leaderboard: { name: string; count: number }[];
+		if (!main) {
+			const res = await fetch('/inc', { method: 'GET' });
+			if (res.ok) {
+				const data = await res.json();
+				count = data.count;
+			}
+		} else {
+			const res = await fetch('/lb', { method: 'GET' });
+			if (res.ok) {
+				leaderboard = await res.json();
+			}
 		}
+
 		return {
 			props: {
-				main: page.host.split('.').length === 2,
+				main,
 				count,
+				leaderboard,
 				plural: page.host.includes('arecancelled.com'),
 				name: page.host
 					.split('.')[0]
@@ -32,10 +43,13 @@
 	export let name: string;
 	export let plural: boolean;
 	export let count: number;
+	export let leaderboard: { name: string; count: number }[];
 </script>
 
-{#if main}
-	<Main />
-{:else}
-	<Cancel {name} {plural} {count} />
-{/if}
+<div class="text-center">
+	{#if main}
+		<Main {leaderboard} />
+	{:else}
+		<Cancel {name} {plural} {count} />
+	{/if}
+</div>

@@ -1,8 +1,12 @@
-<h1 class="mt-10 mb-8 text-6xl text-center">Cancel Culture Creator</h1>
-<p class="my-4 text-xl text-center">
+<script lang="ts">
+	export let leaderboard: { name: string; count: number }[];
+</script>
+
+<h1 class="mt-10 mb-8 text-6xl">Cancel Culture Creator</h1>
+<p class="my-4 text-xl">
 	Cancel culture has truly gone too far. Join us as we cancel even more people!
 </p>
-<h2 class="mt-12 mb-10 text-4xl text-center">Who would you like to cancel?</h2>
+<h2 class="mt-12 mb-10 text-4xl">Who would you like to cancel?</h2>
 <form class="flex flex-wrap" action="/redirect" method="GET">
 	<label class="min-w-[16rem] input">
 		<p class="sr-only">The entity to cancel:</p>
@@ -20,6 +24,15 @@
 		type="submit">Cancel!</button
 	>
 </form>
+
+<h3 class="mt-24 mb-8 text-5xl">Most Cancelled:</h3>
+<div class="w-full flex justify-center">
+	<ol class="list-decimal text-left text-2xl">
+		{#each leaderboard as entry}
+			<li class="mb-4">{entry.name}: {entry.count} cancel{entry.count === 1 ? '' : 's'}!</li>
+		{/each}
+	</ol>
+</div>
 
 <style lang="postcss">
 	.input {
