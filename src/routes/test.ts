@@ -1,12 +1,10 @@
-import { rateLimit } from '$lib/utils/limit';
 import type { RequestHandler } from '@sveltejs/kit';
-import * as uuid from 'uuid';
 
-const limiter = rateLimit();
+const buffer = [];
 
 export const get: RequestHandler = async ({ headers }) => {
-	console.log(headers);
+	buffer.push({ ip: headers['x-real-ip'], time: new Date().toString() });
 	return {
-		body: { ...limiter.check(10, 'CACHE_TOKEN'), id: uuid.v4(), headers }
+		body: buffer
 	};
 };
