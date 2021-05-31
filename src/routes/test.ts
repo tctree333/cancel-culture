@@ -4,8 +4,9 @@ import * as uuid from 'uuid';
 
 const limiter = rateLimit();
 
-export const get: RequestHandler = async () => {
+export const get: RequestHandler = async ({ headers }) => {
+	console.log(headers);
 	return {
-		body: { ...limiter.check(10, 'CACHE_TOKEN'), id: uuid.v4() }
+		body: { ...limiter.check(10, 'CACHE_TOKEN'), id: uuid.v4(), headers }
 	};
 };
