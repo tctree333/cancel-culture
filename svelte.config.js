@@ -1,5 +1,7 @@
 import preprocess from 'svelte-preprocess';
 import vercel from '@sveltejs/adapter-vercel';
+import dotenv from 'dotenv';
+dotenv.config();
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
