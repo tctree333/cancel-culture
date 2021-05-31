@@ -36,9 +36,5 @@
 		"tslib": "^2.0.0",
 		"typescript": "^4.0.0"
 	},
-	"type": "module",
-	"dependencies": {
-		"lru-cache": "^6.0.0",
-		"uuid": "^8.3.2"
-	}
+	"type": "module"
 }
