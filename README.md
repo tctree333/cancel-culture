@@ -21,4 +21,4 @@ The possibilities are endless. And we support plurals too! Cancelling a group ha
 - **[Vercel](https://vercel.com/)**. Normally I'd use [Netlify](https://www.netlify.com/), but they don't have wildcard domains which is the whole point of this. smh
 - **[Porkbun](https://porkbun.com/)**. idk if domains count as part of the stack but I use Porkbun for domains becuase they're cheap and also have everything I need.
 
-(Note: This is a fun thing I thought would be fun. It is a joke (like everything else I do). Please do not abuse this site or use it to abuse others. I was going to do \*.is/areloved.com but those domains weren't available.)
+(Note: This is a fun thing I thought would be fun. It is a joke (like everything else I do). Please do not abuse this site or use it to abuse others. I was going to do \*.is/areloved.com but those domains weren't available. Sad!)
