@@ -1,38 +1,24 @@
-# create-svelte
+# [[a-z0-9-]\*\\.(is|are)cancelled\\.com](https://iscancelled.com)
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+Want a website that shows the top cancelled people or things? This is it! Cancel your friends, relatives, or that weird food item sitting in the back of your fridge since last year.
 
-## Creating a project
+- Dislike a particular letter? **Cancel it!**
+- Your pencil tip broke? **Cancel it!**
+- Weather not great? **Cancel it!**
 
-If you're seeing this, you've probably already done this step. Congrats!
+The possibilities are endless. And we support plurals too! Cancelling a group has never been easier.
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
+## FAQ
 
-# create a new project in my-app
-npm init svelte@next my-app
-```
+- Q: _It's spelled 'canceled'._
+  - A: That's not a question. Also no. Ew.
 
-> Note: the `@next` is temporary
+## Stack
 
-## Developing
+- **[TailwindCSS](https://tailwindcss.com/)**. Honestly it's not necessary (since Svelte has component-scoped styling) and probably makes things more cluttered and bad but whatever.
+- **[SvelteKit](https://kit.svelte.dev/)**. I love it. It's great. Honestly could've used something else but API endpoints are easier, components are cool, everything is easier.
+- **[Upstash](https://upstash.com/)**. Never used it before, but has a nice free tier (that I'm hoping I won't exceed) and it's a simple Redis KV store. Probably overkill since I'm literally using one sorted set, but eh.
+- **[Vercel](https://vercel.com/)**. Normally I'd use [Netlify](https://www.netlify.com/), but they don't have wildcard domains which is the whole point of this. smh
+- **[Porkbun](https://porkbun.com/)**. idk if domains count as part of the stack but I use Porkbun for domains becuase they're cheap and also have everything I need.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
-
-```bash
-npm run build
-```
-
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+(Note: This is a fun thing I thought would be fun. It is a joke (like everything else I do). Please do not abuse this site or use it to abuse others. I was going to do \*.is/areloved.com but those domains weren't available.)
