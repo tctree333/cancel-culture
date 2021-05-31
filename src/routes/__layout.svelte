@@ -72,7 +72,12 @@
 <footer
 	class="flex flex-col items-center justify-center w-full py-16 mt-20 text-gray-100 bg-gray-900 "
 >
-	<p class="text-lg">
+	<p class="mb-4 text-lg">
 		A web project by <a class="underline" href="https://tomichen.com">Tomi Chen.</a>
+	</p>
+	<p class="text-lg">
+		<a class="underline" href="https://github.com/tctree333/cancel-culture"
+			>View the source on GitHub.</a
+		>
 	</p>
 </footer>
