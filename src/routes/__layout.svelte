@@ -65,7 +65,7 @@
 	</div>
 </div>
 
-<main class="min-h-full max-w-4xl px-6 py-4 mx-auto">
+<main class="max-w-4xl min-h-full px-6 py-4 mx-auto">
 	<slot />
 </main>
 

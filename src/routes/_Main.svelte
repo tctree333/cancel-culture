@@ -1,5 +1,6 @@
 <script lang="ts">
 	export let leaderboard: { name: string; count: number }[];
+	export let writesLeft: number;
 </script>
 
 <h1 class="mt-10 mb-8 text-6xl">Cancel Culture Creator</h1>
@@ -24,12 +25,18 @@
 		type="submit">Cancel!</button
 	>
 </form>
+<p class="text-xl mt-14 tabular-nums">
+	You have {writesLeft} cancels left. Wait 15 minutes to refresh.
+</p>
 
-<h3 class="mt-24 mb-8 text-5xl">Most Cancelled:</h3>
-<div class="w-full flex justify-center">
-	<ol class="list-decimal text-left text-2xl">
+<h3 class="mt-20 mb-8 text-5xl">Most Cancelled:</h3>
+<div class="flex justify-center w-full">
+	<ol class="text-2xl text-left list-decimal">
 		{#each leaderboard as entry}
-			<li class="mb-4">{entry.name}: {entry.count} cancel{entry.count === 1 ? '' : 's'}!</li>
+			<li class="mb-4">
+				<a class="underline" href="/redirect?name={entry.name}&plural=false">{entry.name}</a>: {entry.count}
+				cancel{entry.count === 1 ? '' : 's'}!
+			</li>
 		{/each}
 	</ol>
 </div>

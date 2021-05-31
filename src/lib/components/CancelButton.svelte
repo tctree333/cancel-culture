@@ -16,6 +16,7 @@
 	};
 
 	export let count: number;
+	export let writesLeft: number;
 </script>
 
 <form
@@ -26,6 +27,7 @@
 		result: async (res) => {
 			const data = await res.json();
 			count = data.count;
+			writesLeft = data.remaining;
 		}
 	}}
 >
