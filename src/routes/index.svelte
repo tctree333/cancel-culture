@@ -7,12 +7,14 @@
 		let count = 0;
 		let limited = false;
 		let writesLeft = 0;
+		let rank = NaN;
 		let leaderboard: { name: string; count: number }[];
 
 		const res = await fetch('/inc', { method: 'GET' });
 		if (res.ok) {
 			const data = await res.json();
 			if (!main) {
+				rank = data.rank;
 				count = data.count;
 				limited = data.readlimit.isRateLimited;
 			}
@@ -31,6 +33,7 @@
 			props: {
 				main,
 				count,
+				rank,
 				leaderboard,
 				limited,
 				writesLeft,
@@ -55,6 +58,7 @@
 	export let count: number;
 	export let limited: boolean;
 	export let writesLeft: number;
+	export let rank: number;
 	export let leaderboard: { name: string; count: number }[];
 </script>
 
@@ -62,7 +66,7 @@
 	{#if main}
 		<Main {leaderboard} {writesLeft} />
 	{:else}
-		<Cancel {name} {plural} {count} {writesLeft} />
+		<Cancel {name} {plural} {count} {writesLeft} {rank} />
 	{/if}
 </div>
 

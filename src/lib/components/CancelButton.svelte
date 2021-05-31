@@ -17,6 +17,7 @@
 
 	export let count: number;
 	export let writesLeft: number;
+	export let rank: number;
 </script>
 
 <form
@@ -28,6 +29,7 @@
 			const data = await res.json();
 			count = data.count;
 			writesLeft = data.remaining;
+			rank = data.rank;
 		}
 	}}
 >

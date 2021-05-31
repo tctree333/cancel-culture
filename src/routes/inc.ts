@@ -1,4 +1,4 @@
-import { bumpCount, getCount } from '$lib/utils/db';
+import { bumpCount, getCount, getRank } from '$lib/utils/db';
 import { rateLimit } from '$lib/utils/limit';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { ReadOnlyFormData } from '@sveltejs/kit/types/helper';
@@ -10,11 +10,13 @@ export const get: RequestHandler = async ({ headers, host }) => {
 	if (host.split('.').length !== 2) {
 		const limited = readLimiter.check(headers['x-real-ip']);
 		const count = limited.isRateLimited ? 0 : await getCount(host.split('.')[0]);
+		const rank = limited.isRateLimited ? 0 : await getRank(host.split('.')[0]);
 		return {
 			body: {
 				readlimit: { ...limited },
 				writelimit: { ...writeLimiter.peek(headers['x-real-ip']) },
-				count
+				count,
+				rank
 			}
 		};
 	}
@@ -26,23 +28,30 @@ export const get: RequestHandler = async ({ headers, host }) => {
 };
 
 export const post: RequestHandler = async ({ headers, host, body }) => {
-	const limited = writeLimiter.check(headers['x-real-ip']);
-
-	const count =
-		limited.isRateLimited || host.split('.').length === 2 ? 0 : await bumpCount(host.split('.')[0]);
-
-	if ((body as ReadOnlyFormData)?.get?.('noscript')) {
+	if (host.split('.').length !== 2) {
+		const limited = writeLimiter.check(headers['x-real-ip']);
+		const count = limited.isRateLimited ? 0 : await bumpCount(host.split('.')[0]);
+		const rank = limited.isRateLimited ? 0 : await getRank(host.split('.')[0]);
+		if ((body as ReadOnlyFormData)?.get?.('noscript')) {
+			return {
+				status: 302,
+				headers: {
+					location: '/'
+				}
+			};
+		}
 		return {
-			status: 302,
-			headers: {
-				location: '/'
+			body: {
+				...limited,
+				count,
+				rank
 			}
 		};
 	}
 	return {
-		body: {
-			...limited,
-			count
+		status: 302,
+		headers: {
+			location: '/'
 		}
 	};
 };

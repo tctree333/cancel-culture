@@ -6,15 +6,20 @@
 
 	export let count: number;
 	export let writesLeft: number;
+	export let rank: number;
 </script>
 
-<h1 class="mt-16 mb-24 text-6xl">
+<h1 class="mt-16 mb-12 text-6xl">
 	{name}
 	{plural ? 'have' : 'has'} been cancelled:
 	<div class="my-8 tabular-nums">{count} times!</div>
 </h1>
 
-<CancelButton bind:count bind:writesLeft />
+{#if rank}
+	<p class="mb-20 text-2xl">{name} {plural ? 'are' : 'is'} the #{rank} most cancelled thing!</p>
+{/if}
+
+<CancelButton bind:count bind:writesLeft bind:rank />
 
 <p class="text-xl mt-14 tabular-nums">
 	You have {writesLeft} cancels left. Wait 15 minutes to refresh.

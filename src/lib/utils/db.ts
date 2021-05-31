@@ -8,6 +8,10 @@ export async function getCount(host: string): Promise<number> {
 	return parseInt(await client.zscore(key, host)) || 0;
 }
 
+export async function getRank(host: string): Promise<number> {
+	return (await client.zrevrank(key, host)) || NaN;
+}
+
 export async function bumpCount(host: string): Promise<number> {
 	return parseInt(await client.zincrby(key, 1, host)) || 0;
 }
