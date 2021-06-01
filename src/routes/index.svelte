@@ -29,12 +29,26 @@
 			}
 		}
 
+		const placeholders = [
+			{ text: 'you', plural: true },
+			{ text: 'sleeping', plural: false },
+			{ text: 'aging', plural: false },
+			{ text: 'this pencil', plural: false },
+			{ text: 'government spies', plural: true },
+			{ text: 'bad posture', plural: false },
+			{ text: 'javascript', plural: false },
+			{ text: 'computers', plural: true },
+			{ text: 'dying', plural: false }
+		];
+		const placeholder = placeholders[Math.floor(Math.random() * placeholders.length)];
+
 		return {
 			props: {
 				main,
 				count,
 				rank,
 				leaderboard,
+				placeholder,
 				limited,
 				writesLeft,
 				plural: page.host.includes('arecancelled.com'),
@@ -62,6 +76,8 @@
 	export let rank: number;
 	export let leaderboard: { name: string; count: number }[];
 
+	export let placeholder: { text: string; plural: boolean };
+
 	let title = main ? 'Cancel Anything!' : `${name} ${plural ? 'Are' : 'Is'} Cancelled!`;
 	let description = main
 		? 'Cancel culture has truly gone too far. Join us as we cancel even more people and things! ' +
@@ -77,7 +93,7 @@
 
 <div class="text-center">
 	{#if main}
-		<Main {leaderboard} {writesLeft} />
+		<Main {leaderboard} {writesLeft} {placeholder} />
 	{:else}
 		<Cancel {name} {plural} {count} {writesLeft} {rank} />
 	{/if}

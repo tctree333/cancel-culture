@@ -2,18 +2,7 @@
 	export let leaderboard: { name: string; count: number }[];
 	export let writesLeft: number;
 
-	let placeholders = [
-		{ text: 'you', plural: true },
-		{ text: 'sleeping', plural: false },
-		{ text: 'aging', plural: false },
-		{ text: 'this pencil', plural: false },
-		{ text: 'government spies', plural: true },
-		{ text: 'bad posture', plural: false },
-		{ text: 'javascript', plural: false },
-		{ text: 'computers', plural: true },
-		{ text: 'dying', plural: false }
-	];
-	let placeholder = placeholders[Math.floor(Math.random() * placeholders.length)];
+	export let placeholder: { text: string; plural: boolean };
 </script>
 
 <h1 class="mt-10 mb-8 text-6xl">Cancel Culture Creator</h1>
