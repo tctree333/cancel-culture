@@ -33,7 +33,7 @@
 </div>
 
 <main
-	class="max-w-4xl min-h-full px-6 py-4 mx-auto bg-gray-100 bg-opacity-30 dark:bg-gray-800 dark:bg-opacity-30"
+	class="max-w-4xl min-h-full px-6 py-4 mx-auto transition duration-300 bg-gray-100 bg-opacity-30 dark:bg-gray-800 dark:bg-opacity-30"
 >
 	<slot />
 </main>
