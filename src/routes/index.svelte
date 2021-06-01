@@ -62,8 +62,6 @@
 	export let rank: number;
 	export let leaderboard: { name: string; count: number }[];
 
-	export let placeholder: { text: string; plural: boolean };
-
 	let title = main ? 'Cancel Anything!' : `${name} ${plural ? 'Are' : 'Is'} Cancelled!`;
 	let description = main
 		? 'Cancel culture has truly gone too far. Join us as we cancel even more people and things! ' +

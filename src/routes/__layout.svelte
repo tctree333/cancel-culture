@@ -32,12 +32,14 @@
 	</div>
 </div>
 
-<main class="max-w-4xl min-h-full px-6 py-4 mx-auto">
+<main
+	class="max-w-4xl min-h-full px-6 py-4 mx-auto bg-gray-100 bg-opacity-30 dark:bg-gray-800 dark:bg-opacity-30"
+>
 	<slot />
 </main>
 
 <footer
-	class="flex flex-col items-center justify-center w-full py-16 mt-20 text-gray-100 bg-gray-900 "
+	class="flex flex-col items-center justify-center w-full py-16 mt-20 text-gray-100 bg-gray-900 bg-tic-tac-toe-light"
 >
 	<p class="mb-4 text-lg">
 		A web project by <a class="underline" href="https://tomichen.com">Tomi Chen.</a>
