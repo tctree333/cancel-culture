@@ -34,14 +34,6 @@
 	<title>{title}</title>
 	<meta name="description" content={description} />
 
-	<link
-		rel="preload"
-		href="/fonts/PT-Root-UI_Regular-subset.woff2"
-		as="font"
-		type="font/woff2"
-		crossorigin="anonymous"
-	/>
-
 	<!-- Allow search engines to crawl certain pages -->
 	{#if index === false}
 		<meta name="robots" content="none" />
