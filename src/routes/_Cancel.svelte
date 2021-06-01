@@ -12,7 +12,7 @@
 <h1 class="mt-16 mb-12 text-6xl leading-tight">
 	{name}
 	{plural ? 'have' : 'has'} been cancelled:
-	<div class="my-8 tabular-nums">{count} times!</div>
+	<div class="my-8 tabular-nums">{count} time{count === 1 ? '' : 's'}!</div>
 </h1>
 
 {#if rank}

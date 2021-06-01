@@ -21,7 +21,7 @@
 		placeholders[Math.floor((new Date().getMinutes() / 60) * placeholders.length)];
 </script>
 
-<h1 class="mt-10 mb-8 text-6xl">Cancel Culture Creator</h1>
+<h1 class="mt-16 mb-8 text-6xl">Cancel Culture Creator</h1>
 <p class="my-4 text-xl">
 	Cancel culture has truly gone too far. Join us as we cancel even more people!
 </p>
@@ -49,7 +49,7 @@
 
 <h3 class="mt-20 mb-8 text-5xl">Most Cancelled:</h3>
 <div class="flex justify-center w-full">
-	<ol class="text-2xl text-left list-decimal">
+	<ol class="pl-10 text-2xl text-left list-decimal sm:pr-10">
 		{#each leaderboard as entry}
 			<li class="mb-4">
 				<a class="underline" href="/redirect?name={entry.name}&plural=false">{entry.name}</a>: {entry.count}
