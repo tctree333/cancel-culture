@@ -38,7 +38,11 @@
 			{ text: 'bad posture', plural: false },
 			{ text: 'javascript', plural: false },
 			{ text: 'computers', plural: true },
-			{ text: 'dying', plural: false }
+			{ text: 'dying', plural: false },
+			{ text: 'dehydrated people', plural: true },
+			{ text: 'sus amogus', plural: false },
+			{ text: 'cancel culture', plural: false },
+			{ text: 'everything', plural: false }
 		];
 		const placeholder = placeholders[Math.floor(Math.random() * placeholders.length)];
 
