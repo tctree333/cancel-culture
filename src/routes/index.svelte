@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import type { Load } from '@sveltejs/kit';
 
-	export const load: Load = async ({ page, fetch }) => {
+	export const load: Load = async ({ page, session, fetch }) => {
 		const main = page.host.split('.').length === 2;
 
 		let count = 0;
@@ -10,7 +10,7 @@
 		let rank = NaN;
 		let leaderboard: { name: string; count: number }[];
 
-		const res = await fetch('/inc', { method: 'GET' });
+		const res = await fetch(`/inc?token=${session.ip}`, { method: 'GET' });
 		if (res.ok) {
 			const data = await res.json();
 			if (!main) {
@@ -21,7 +21,7 @@
 			writesLeft = data.writelimit.remaining;
 		}
 		if (main) {
-			const res = await fetch('/lb', { method: 'GET' });
+			const res = await fetch(`/lb?token=${session.ip}`, { method: 'GET' });
 			if (res.ok) {
 				const data = await res.json();
 				leaderboard = data.lb;
