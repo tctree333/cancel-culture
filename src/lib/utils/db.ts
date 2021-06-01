@@ -9,7 +9,8 @@ export async function getCount(host: string): Promise<number> {
 }
 
 export async function getRank(host: string): Promise<number> {
-	return (await client.zrevrank(key, host)) + 1;
+	const data = await client.zrevrank(key, host)
+	return data === null ? NaN : data + 1;
 }
 
 export async function bumpCount(host: string): Promise<number> {
