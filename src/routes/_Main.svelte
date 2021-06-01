@@ -2,7 +2,23 @@
 	export let leaderboard: { name: string; count: number }[];
 	export let writesLeft: number;
 
-	export let placeholder: { text: string; plural: boolean };
+	const placeholders = [
+		{ text: 'you', plural: true },
+		{ text: 'sleeping', plural: false },
+		{ text: 'aging', plural: false },
+		{ text: 'this pencil', plural: false },
+		{ text: 'government spies', plural: true },
+		{ text: 'bad posture', plural: false },
+		{ text: 'javascript', plural: false },
+		{ text: 'computers', plural: true },
+		{ text: 'dying', plural: false },
+		{ text: 'dehydrated people', plural: true },
+		{ text: 'sus amogus', plural: false },
+		{ text: 'cancel culture', plural: false },
+		{ text: 'everything', plural: false }
+	];
+	const placeholder =
+		placeholders[Math.floor((new Date().getMinutes() / 60) * placeholders.length)];
 </script>
 
 <h1 class="mt-10 mb-8 text-6xl">Cancel Culture Creator</h1>

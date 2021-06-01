@@ -29,30 +29,12 @@
 			}
 		}
 
-		const placeholders = [
-			{ text: 'you', plural: true },
-			{ text: 'sleeping', plural: false },
-			{ text: 'aging', plural: false },
-			{ text: 'this pencil', plural: false },
-			{ text: 'government spies', plural: true },
-			{ text: 'bad posture', plural: false },
-			{ text: 'javascript', plural: false },
-			{ text: 'computers', plural: true },
-			{ text: 'dying', plural: false },
-			{ text: 'dehydrated people', plural: true },
-			{ text: 'sus amogus', plural: false },
-			{ text: 'cancel culture', plural: false },
-			{ text: 'everything', plural: false }
-		];
-		const placeholder = placeholders[Math.floor(Math.random() * placeholders.length)];
-
 		return {
 			props: {
 				main,
 				count,
 				rank,
 				leaderboard,
-				placeholder,
 				limited,
 				writesLeft,
 				plural: page.host.includes('arecancelled.com'),
@@ -97,7 +79,7 @@
 
 <div class="text-center">
 	{#if main}
-		<Main {leaderboard} {writesLeft} {placeholder} />
+		<Main {leaderboard} {writesLeft} />
 	{:else}
 		<Cancel {name} {plural} {count} {writesLeft} {rank} />
 	{/if}
