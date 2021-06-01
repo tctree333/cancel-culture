@@ -14,15 +14,16 @@
 	export { className as class };
 </script>
 
-<label class="relative block">
-	<p class="sr-only">Toggle Dark Mode</p>
+<div class="relative block">
 	<button
 		tabindex="0"
 		class="absolute top-0 left-0 opacity-0 cursor-pointer outline-none {widthClass}"
 		type="button"
 		id="dark-toggle"
 		on:click={toggle}
-	/>
+	>
+		<span class="sr-only">Toggle Dark Mode</span>
+	</button>
 	<div aria-hidden="true" class="{className} {widthClass} flex items-center justify-center">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +50,7 @@
 			/>
 		</svg>
 	</div>
-</label>
+</div>
 
 <style lang="postcss">
 	button:focus-visible + div {

@@ -49,6 +49,7 @@
 </script>
 
 <script lang="ts">
+	import Head from '$lib/components/Head.svelte';
 	import Cancel from './_Cancel.svelte';
 	import Main from './_Main.svelte';
 
@@ -60,7 +61,19 @@
 	export let writesLeft: number;
 	export let rank: number;
 	export let leaderboard: { name: string; count: number }[];
+
+	let title = main ? 'Cancel Anything!' : `${name} ${plural ? 'Are' : 'Is'} Cancelled!`;
+	let description = main
+		? 'Cancel culture has truly gone too far. Join us as we cancel even more people and things! ' +
+		  'Want a website that shows the top cancelled people or things? This is it! ' +
+		  'Cancel your friends, relatives, or that weird food item sitting in the back of your fridge since last year.'
+		: `${name} ${plural ? 'are' : 'is'} cancelled! ` +
+		  `What terrible things did they do? Who knows! All we know is that ` +
+		  `${name} ${plural ? 'are' : 'is'} cancelled, and they probably deserve it! ` +
+		  `Join us as we celebrate the #${name.split(' ').join('')}${plural ? 'Are' : 'Is'}OverParty!`;
 </script>
+
+<Head {title} {description} index={main} />
 
 <div class="text-center">
 	{#if main}
