@@ -1,6 +1,19 @@
 <script lang="ts">
 	export let leaderboard: { name: string; count: number }[];
 	export let writesLeft: number;
+
+	let placeholders = [
+		{ text: 'you', plural: true },
+		{ text: 'sleeping', plural: false },
+		{ text: 'aging', plural: false },
+		{ text: 'this pencil', plural: false },
+		{ text: 'government spies', plural: true },
+		{ text: 'bad posture', plural: false },
+		{ text: 'javascript', plural: false },
+		{ text: 'computers', plural: true },
+		{ text: 'dying', plural: false }
+	];
+	let placeholder = placeholders[Math.floor(Math.random() * placeholders.length)];
 </script>
 
 <h1 class="mt-10 mb-8 text-6xl">Cancel Culture Creator</h1>
@@ -11,13 +24,13 @@
 <form class="flex flex-wrap" action="/redirect" method="GET">
 	<label class="min-w-[16rem] input">
 		<p class="sr-only">The entity to cancel:</p>
-		<input type="text" name="name" class="px-4" placeholder="you" />
+		<input type="text" name="name" class="px-4" placeholder={placeholder.text} />
 	</label>
 	<label class="flex-1 min-w-max">
 		<p class="sr-only">Plural</p>
 		<select name="plural" class="pl-4 pr-10 appearance-none">
-			<option value="false">.iscancelled.com</option>
-			<option value="true" selected>.arecancelled.com</option>
+			<option value="false" selected={!placeholder.plural}>.iscancelled.com</option>
+			<option value="true" selected={placeholder.plural}>.arecancelled.com</option>
 		</select>
 	</label>
 	<button
