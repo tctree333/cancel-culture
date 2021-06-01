@@ -1,9 +1,9 @@
 import type { GetSession, Handle } from '@sveltejs/kit';
 
-export const handle: Handle = async ({ request, render }) => {
+export const handle: Handle = async ({ request, resolve }) => {
 	request.locals.ip = request.headers['x-real-ip'];
 
-	return await render(request);
+	return await resolve(request);
 };
 
 export const getSession: GetSession = (request) => {
