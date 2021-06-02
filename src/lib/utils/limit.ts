@@ -7,23 +7,18 @@ export const rateLimit = (
 	check: (token: string) => { isRateLimited: boolean; remaining: number };
 	peek: (token: string) => { isRateLimited: boolean; remaining: number };
 } => {
-	const tokenCache = new LRU<string, [number]>({
+	const tokenCache = new LRU<string, number>({
 		max: 1000,
 		maxAge
 	});
 
 	return {
 		check: (token: string) => {
-			// we use an array to modify the count without updating the "recency" in the cache
-			const tokenCount = tokenCache.get(token) || [0];
-			if (tokenCount[0] === 0) {
-				// we set to tokenCount since we update the value of it later
-				tokenCache.set(token, tokenCount);
-			}
-			// this mutates the array stored in the cache without updating the "recency"
-			tokenCount[0] += 1;
+			let tokenCount = tokenCache.get(token) || 0;
+			tokenCount += 1;
+			tokenCache.set(token, tokenCount);
 
-			const currentUsage = tokenCount[0];
+			const currentUsage = tokenCount;
 			const isRateLimited = currentUsage >= limit;
 			return {
 				isRateLimited,
@@ -31,8 +26,7 @@ export const rateLimit = (
 			};
 		},
 		peek: (token: string) => {
-			const use = tokenCache.peek(token) || [0];
-			const currentUsage = use[0];
+			const currentUsage = tokenCache.get(token) || 0;
 			const isRateLimited = currentUsage >= limit;
 			return {
 				isRateLimited,
