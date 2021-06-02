@@ -22,7 +22,7 @@
 	</script>
 </svelte:head>
 
-<div class="relative max-w-6xl mx-auto">
+<header class="relative max-w-6xl mx-auto">
 	<div class="absolute top-0 right-0 mr-4 max-w-max">
 		<DarkToggle
 			widthClass="w-16 h-16"
@@ -30,7 +30,7 @@
 			size="32"
 		/>
 	</div>
-</div>
+</header>
 
 <main
 	class="max-w-4xl min-h-full px-6 py-4 mx-auto transition duration-300 bg-gray-100 bg-opacity-30 dark:bg-gray-800 dark:bg-opacity-30"
