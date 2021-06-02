@@ -73,7 +73,7 @@
 		  `Join us as we celebrate the #${name.split(' ').join('')}${plural ? 'Are' : 'Is'}OverParty!`;
 </script>
 
-<Head {title} {description} index={main} />
+<Head {title} {description} />
 
 <div class="text-center">
 	{#if main}
