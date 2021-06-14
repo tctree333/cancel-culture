@@ -9,7 +9,7 @@ export async function getCount(host: string): Promise<number> {
 }
 
 export async function getRank(host: string): Promise<number> {
-	const data = await client.zrevrank(key, host)
+	const data = await client.zrevrank(key, host);
 	return data === null ? NaN : data + 1;
 }
 
@@ -17,8 +17,14 @@ export async function bumpCount(host: string): Promise<number> {
 	return parseInt(await client.zincrby(key, 1, host)) || 0;
 }
 
-export async function getLeaderboard(): Promise<{ name: string; count: number }[]> {
-	const data = await client.zrevrangebyscore(key, '+inf', '-inf', 'WITHSCORES', 'LIMIT', 0, 10);
+export async function getLeaderboard(
+	limit: number | false = 10
+): Promise<{ name: string; count: number }[]> {
+	const data: string[] =
+		limit === false
+			? await client.zrevrangebyscore(key, '+inf', '-inf', 'WITHSCORES')
+			: await client.zrevrangebyscore(key, '+inf', '-inf', 'WITHSCORES', 'LIMIT', 0, limit);
+
 	return data
 		.reduce(
 			// transforms an array of [name, count, name, count, ...]
