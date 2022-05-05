@@ -2,7 +2,7 @@ import { bumpCount, getCount, getRank } from '$lib/utils/db';
 import { rateLimit } from '$lib/utils/limit';
 import type { RequestHandler } from '@sveltejs/kit';
 
-const writeLimiter = rateLimit(100, 60 * 15, 'write'); // 100 writes every 15 minutes
+const writeLimiter = rateLimit(100, 60 * 5, 'write'); // 100 writes every 5 minutes
 const readLimiter = rateLimit(20, 5, 'read'); // 60 reads every 30 seconds
 
 export const get: RequestHandler = async ({ request, url }) => {

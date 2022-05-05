@@ -44,7 +44,7 @@
 	>
 </form>
 <p class="text-xl mt-14 tabular-nums">
-	You have {writesLeft} cancels left. Wait 15 minutes to refresh.
+	You have {writesLeft} cancels left. Wait 5 minutes to refresh.
 </p>
 
 <h3 class="mt-20 mb-8 text-5xl">Most Cancelled:</h3>

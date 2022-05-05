@@ -22,7 +22,7 @@
 <CancelButton bind:count bind:writesLeft bind:rank />
 
 <p class="text-xl mt-14 tabular-nums">
-	You have {writesLeft} cancels left. Wait 15 minutes to refresh.
+	You have {writesLeft} cancels left. Wait 5 minutes to refresh.
 </p>
 
 <p class="mt-20 text-lg">
