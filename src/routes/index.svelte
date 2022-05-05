@@ -1,8 +1,8 @@
 <script context="module" lang="ts">
 	import type { Load } from '@sveltejs/kit';
 
-	export const load: Load = async ({ page, session, fetch }) => {
-		const main = page.host.split('.').length === 2;
+	export const load: Load = async ({ url, session, fetch }) => {
+		const main = url.host.split('.').length === 2;
 
 		let count = 0;
 		let limited = false;
@@ -37,11 +37,11 @@
 				leaderboard,
 				limited,
 				writesLeft,
-				plural: page.host.includes('arecancelled.com'),
-				name: page.host
+				plural: url.host.includes('arecancelled.com'),
+				name: url.host
 					.split('.')[0]
 					.split('-')
-					.map((c) => c[0].toUpperCase() + c.substr(1).toLowerCase())
+					.map((c) => c[0].toUpperCase() + c.slice(1).toLowerCase())
 					.join(' ')
 			}
 		};

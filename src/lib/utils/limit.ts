@@ -1,38 +1,41 @@
-import LRU from 'lru-cache';
+import Redis from 'ioredis';
+
+export const client = new Redis(process.env['REDIS_URL']);
 
 export const rateLimit = (
 	limit: number,
-	maxAge: number
+	maxAge: number,
+	key: string
 ): {
-	check: (token: string) => { isRateLimited: boolean; remaining: number };
-	peek: (token: string) => { isRateLimited: boolean; remaining: number };
+	check: (token: string) => Promise<{ isRateLimited: boolean; remaining: number }>;
+	peek: (token: string) => Promise<{ isRateLimited: boolean; remaining: number }>;
 } => {
-	const tokenCache = new LRU<string, [number]>({
-		max: 1000,
-		maxAge
-	});
+	function k(token: string) {
+		return `ratelimit:${key}:${token}`;
+	}
 
 	return {
-		check: (token: string) => {
+		check: async (token: string) => {
 			// we use an array to modify the count without updating the maxAge on set
-			const tokenCount = tokenCache.get(token) || [0];
-			if (tokenCount[0] === 0) {
+			const tokenCount = parseInt(await client.get(k(token))) || 0;
+			if (tokenCount === 0) {
 				// we set to tokenCount since we update the value of it later
-				tokenCache.set(token, tokenCount);
+				await client.set(k(token), tokenCount);
+				await client.expire(k(token), maxAge);
 			}
 			// this mutates the array stored in the cache without updating the maxAge
-			tokenCount[0] += 1;
+			await client.incr(k(token));
 
-			const currentUsage = tokenCount[0];
+			const currentUsage = parseInt(await client.get(k(token)));
 			const isRateLimited = currentUsage >= limit;
 			return {
 				isRateLimited,
 				remaining: isRateLimited ? 0 : limit - currentUsage
 			};
 		},
-		peek: (token: string) => {
-			const use = tokenCache.peek(token) || [0];
-			const currentUsage = use[0];
+
+		peek: async (token: string) => {
+			const currentUsage = parseInt(await client.get(k(token))) || 0;
 			const isRateLimited = currentUsage >= limit;
 			return {
 				isRateLimited,

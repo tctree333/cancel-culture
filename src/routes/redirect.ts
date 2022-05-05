@@ -1,10 +1,14 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import slugify from 'slugify';
 
-export const get: RequestHandler = async ({ query }) => {
+export const get: RequestHandler = async ({ url }) => {
 	const plural =
-		query.get('plural') === 'true' ? true : query.get('plural') === 'false' ? false : null;
-	const name = query.get('name');
+		url.searchParams.get('plural') === 'true'
+			? true
+			: url.searchParams.get('plural') === 'false'
+			? false
+			: null;
+	const name = url.searchParams.get('name');
 	if (name === null || name === '' || plural === null) {
 		return {
 			status: 303,

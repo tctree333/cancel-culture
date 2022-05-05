@@ -46,7 +46,7 @@ export async function getLeaderboard(
 				// converts hyphens to spaces, as well as making the name title case
 				name: value[0]
 					.split('-')
-					.map((c) => c[0].toUpperCase() + c.substr(1).toLowerCase())
+					.map((c) => c[0].toUpperCase() + c.slice(1).toLowerCase())
 					.join(' '),
 				count: parseInt(value[1]) || 0
 			})

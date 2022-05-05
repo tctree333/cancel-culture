@@ -4,7 +4,7 @@
 	function toggle() {
 		document.cookie = `theme=${
 			document.cookie.split(';').some((c) => c.includes('theme=dark')) ? 'light' : 'dark'
-		}; SameSite=None; Secure; Domain=${$page.host.split('.').slice(-2).join('.')}; Path=/`;
+		}; SameSite=None; Secure; Domain=${$page.url.host.split('.').slice(-2).join('.')}; Path=/`;
 		//@ts-ignore
 		window.setState();
 	}

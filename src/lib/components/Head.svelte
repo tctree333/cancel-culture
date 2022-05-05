@@ -12,10 +12,10 @@
 	export let index = true;
 	export let pageImage: PageImage | undefined = undefined;
 
-	let url = fullUrl($page.path);
+	let url = fullUrl($page.url.pathname);
 
 	function fullUrl(value: string) {
-		let root = 'https://' + $page.host;
+		let root = 'https://' + $page.url.host;
 		if (value.startsWith(root)) {
 			return value;
 		}

@@ -1,21 +1,20 @@
 import { bumpCount, getCount, getRank } from '$lib/utils/db';
 import { rateLimit } from '$lib/utils/limit';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { ReadOnlyFormData } from '@sveltejs/kit/types/helper';
 
-const writeLimiter = rateLimit(100, 1000 * 60 * 15); // 100 writes every 15 minutes
-const readLimiter = rateLimit(15, 1000 * 30); // 15 reads every 30 seconds
+const writeLimiter = rateLimit(100, 1000 * 60 * 15, 'write'); // 100 writes every 15 minutes
+const readLimiter = rateLimit(15, 1000 * 30, 'read'); // 15 reads every 30 seconds
 
-export const get: RequestHandler = async ({ headers, query, host }) => {
-	const token = headers['x-real-ip'] || query.get('token');
-	if (host.split('.').length !== 2) {
-		const limited = readLimiter.check(token);
-		const count = limited.isRateLimited ? 0 : await getCount(host.split('.')[0]);
-		const rank = limited.isRateLimited ? 0 : await getRank(host.split('.')[0]);
+export const get: RequestHandler = async ({ request, url }) => {
+	const token = request.headers['x-real-ip'] || url.searchParams.get('token');
+	if (url.host.split('.').length !== 2) {
+		const limited = await readLimiter.check(token);
+		const count = limited.isRateLimited ? 0 : await getCount(url.host.split('.')[0]);
+		const rank = limited.isRateLimited ? 0 : await getRank(url.host.split('.')[0]);
 		return {
 			body: {
 				readlimit: { ...limited },
-				writelimit: { ...writeLimiter.peek(token) },
+				writelimit: { ...(await writeLimiter.peek(token)) },
 				count,
 				rank
 			}
@@ -23,17 +22,18 @@ export const get: RequestHandler = async ({ headers, query, host }) => {
 	}
 	return {
 		body: {
-			writelimit: { ...writeLimiter.peek(token) }
+			writelimit: { ...(await writeLimiter.peek(token)) }
 		}
 	};
 };
 
-export const post: RequestHandler = async ({ headers, host, body }) => {
-	if (host.split('.').length !== 2) {
-		const limited = writeLimiter.check(headers['x-real-ip']);
-		const count = limited.isRateLimited ? 0 : await bumpCount(host.split('.')[0]);
-		const rank = limited.isRateLimited ? 0 : await getRank(host.split('.')[0]);
-		if ((body as ReadOnlyFormData)?.get?.('noscript')) {
+export const post: RequestHandler = async ({ request, url }) => {
+	if (url.host.split('.').length !== 2) {
+		const limited = await writeLimiter.check(request.headers['x-real-ip']);
+		const count = limited.isRateLimited ? 0 : await bumpCount(url.host.split('.')[0]);
+		const rank = limited.isRateLimited ? 0 : await getRank(url.host.split('.')[0]);
+		const body = await request.formData();
+		if (body.get('noscript')) {
 			return {
 				status: 302,
 				headers: {

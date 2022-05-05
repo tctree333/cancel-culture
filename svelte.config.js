@@ -15,8 +15,7 @@ const config = {
 
 	kit: {
 		adapter: vercel(),
-		target: '#svelte',
-		router: false
+		browser: { router: false }
 	}
 };
 
