@@ -3,7 +3,7 @@ import { rateLimit } from '$lib/utils/limit';
 import type { RequestHandler } from '@sveltejs/kit';
 
 const writeLimiter = rateLimit(100, 60 * 15, 'write'); // 100 writes every 15 minutes
-const readLimiter = rateLimit(60, 30, 'read'); // 60 reads every 30 seconds
+const readLimiter = rateLimit(20, 5, 'read'); // 60 reads every 30 seconds
 
 export const get: RequestHandler = async ({ request, url }) => {
 	const token = request.headers.get('x-real-ip') || url.searchParams.get('token');
